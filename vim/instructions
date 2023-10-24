@@ -1,0 +1,6 @@
+Install plugins by running:
+
+git clone https://github.com/mg979/vim-visual-multi ~/.vim/pack/plugins/start/vim-visual-multi
+git clone https://github.com/junegunn/fzf ~/.vim/pack/plugins/start/fzf
+git clone https://github.com/junegunn/fzf.vim ~/.vim/pack/plugins/start/fzf.vim
+git clone https://github.com/rhysd/clever-f.vim .vim/pack/plugins/start/clever-f.vim

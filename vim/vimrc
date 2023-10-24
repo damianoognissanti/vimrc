@@ -1,9 +1,3 @@
-" install plugins with:
-" git clone https://github.com/mg979/vim-visual-multi ~/.vim/pack/plugins/start/vim-visual-multi
-" git clone https://github.com/junegunn/fzf ~/.vim/pack/plugins/start/fzf
-" git clone https://github.com/junegunn/fzf.vim ~/.vim/pack/plugins/start/fzf.vim
-" git clone https://github.com/rhysd/clever-f.vim .vim/pack/plugins/start/clever-f.vim
-
 " set colorscheme, enable syntax highlighting
 colorscheme habamax
 syntax enable
@@ -45,8 +39,7 @@ xnoremap s :VMSearch<space>
 nnoremap <silent> <leader>g :Ag <C-R><C-W><cr>
 nnoremap <silent> <leader>f :Files<cr>
 
-" Makes search "fuzzy" by adding .* instead of space when searching, makes
-" space clear search highlight, maps ä to search.
+" search is "fuzzy" by adding .\{-} instead of space when searching, space clear search highlight, ä/Ä mapped to search.
 cnoremap <expr> <space> getcmdtype() == "/" \|\| getcmdtype() == "?" ? ".\\{-}" : "<space>"
 nnoremap <space> :nohlsearch<cr>
 nnoremap ä /
@@ -57,7 +50,7 @@ tmap <leader>t <esc>:bd!<cr>
 tmap <esc> <C-\><C-n>
 " ör opens replace all
 noremap <leader>r :%s///g<left><left><left>
-" makes x mark line (helix-like)
+" x/X marks line (helix-like)
 nnoremap x V
 nnoremap X V
 xnoremap x j
