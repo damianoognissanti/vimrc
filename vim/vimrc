@@ -38,6 +38,7 @@ xnoremap s :VMSearch<space>
 " ög fzf grep, öf fzf files, öb fzf buffers, öl fzf lines
 nnoremap <silent> <leader>g :Ag <C-R><C-W><cr>
 nnoremap <silent> <leader>f :Files<cr>
+nnoremap <silent> <leader>l :BLines <Cr>
 
 " search is "fuzzy" by adding .\{-} instead of space when searching, space clear search highlight, ä/Ä mapped to search.
 cnoremap <expr> <space> getcmdtype() == "/" \|\| getcmdtype() == "?" ? ".\\{-}" : "<space>"
