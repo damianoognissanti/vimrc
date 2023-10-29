@@ -30,27 +30,29 @@ inoremap jj <esc>
 
 " show fzf window in other tab (needed to that no .swp is created if cancelled without opening anything)
 let g:fzf_layout = { 'down': '100%' } 
-" map leader to ö (övrigt)
-let mapleader = "ö" 
+" disable standard mappings for fold search
+let g:foldsearch_disable_mappings = 1
+" map leader to space
+let mapleader = "\<space>" 
 
 " s in visual mode will search for word where multicursor will be created
 xnoremap s :VMSearch<space>
-" ög fzf grep, öf fzf files, öb fzf buffers, öl fzf lines
+" fzf grep, fzf files, fzf lines, unfold all, replace all
 nnoremap <silent> <leader>g :Ag <C-R><C-W><cr>
 nnoremap <silent> <leader>f :Files<cr>
-nnoremap <silent> <leader>l :BLines <Cr>
-
-" search is "fuzzy" by adding .\{-} instead of space when searching, space clear search highlight, ä/Ä mapped to search.
+nnoremap <silent> <leader>l :BLines <cr>
+nnoremap <silent> <leader>z zR
+noremap <leader>r :%s///g<left><left><left>
+" search is "fuzzy" by adding .\{-} instead of space when searching, space clear search highlight, ö/Ö mapped to search.
 cnoremap <expr> <space> getcmdtype() == "/" \|\| getcmdtype() == "?" ? ".\\{-}" : "<space>"
+cnoremap <expr> <cr> getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<cr>:Fs<cr>" : "<cr>"
 nnoremap <space> :nohlsearch<cr>
-nnoremap ä /
-nnoremap Ä ?
-" öt toggles terminal, esc enters normal mode in terminal
+nnoremap ö /
+nnoremap Ö ?
+" toggles terminal, esc enters normal mode in terminal
 nnoremap <silent> <leader>t :terminal<cr>
 tmap <leader>t <esc>:bd!<cr>
 tmap <esc> <C-\><C-n>
-" ör opens replace all
-noremap <leader>r :%s///g<left><left><left>
 " x/X marks line (helix-like)
 nnoremap x V
 nnoremap X V
