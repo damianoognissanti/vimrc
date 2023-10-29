@@ -37,10 +37,13 @@ let mapleader = "\<space>"
 
 " s in visual mode will search for word where multicursor will be created
 xnoremap s :VMSearch<space>
-" fzf grep, fzf files, fzf lines, unfold all, replace all
+" fzf grep, fzf files, fzf lines, unfold all, increase lines in fold, decrease
+" lines in fold, replace all
 nnoremap <silent> <leader>g :Ag <C-R><C-W><cr>
 nnoremap <silent> <leader>f :Files<cr>
 nnoremap <silent> <leader>l :BLines <cr>
+nnoremap <silent> <leader>i :Fi<cr>
+nnoremap <silent> <leader>d :Fd<cr>
 nnoremap <silent> <leader>z zR
 noremap <leader>r :%s///g<left><left><left>
 " search is "fuzzy" by adding .\{-} instead of space when searching, space clear search highlight, ö/Ö mapped to search.
