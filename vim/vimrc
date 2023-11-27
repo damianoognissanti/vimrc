@@ -4,7 +4,7 @@ syntax enable
 " enable line number, disable vi compatibility, don't redraw while executing macros (better performance), disable error bell
 set nocompatible number lazyredraw belloff=all 
 " turn on the wild menu (autocomplete commands), highlight the active line
-set wildmenu cursorline cursorcolumn 
+set wildmenu cursorline "cursorcolumn 
 " 1 tab == 4 spaces
 set shiftwidth=4 tabstop=4 expandtab softtabstop=4 
 " height of the command bar, show commands in bottom line (and number prefixes), always show statusline, always show tab line
@@ -28,6 +28,23 @@ au InsertEnter * set timeoutlen=200
 au InsertLeave * set timeoutlen=1000
 inoremap jj <esc>
 
+" toggle fold function (since zi breaks fold-search)
+function ToggleFold()
+    let view = winsaveview()
+    exec 'keepjumps normal! zj'
+    if foldclosed('.') > -1 
+        exec 'normal! zR' 
+    else
+        exec 'keepjumps normal! zk'
+        if foldclosed('.') > -1 
+            exec 'normal! zR' 
+        else 
+            exec 'normal! zM' 
+        endif
+    endif
+    call winrestview(view)
+endfunction
+
 " show fzf window in other tab (needed to that no .swp is created if cancelled without opening anything)
 let g:fzf_layout = { 'down': '100%' } 
 " disable standard mappings for fold search
@@ -44,7 +61,7 @@ nnoremap <silent> <leader>f :Files<cr>
 nnoremap <silent> <leader>l :BLines <cr>
 nnoremap <silent> <leader>i :Fi<cr>
 nnoremap <silent> <leader>d :Fd<cr>
-nnoremap <silent> <leader>z zR
+nnoremap <silent> <cr> :call ToggleFold()<cr>zz
 noremap <leader>r :%s///g<left><left><left>
 " search is "fuzzy" by adding .\{-} instead of space when searching, space clear search highlight, ö/Ö mapped to search.
 cnoremap <expr> <space> getcmdtype() == "/" \|\| getcmdtype() == "?" ? ".\\{-}" : "<space>"
@@ -63,3 +80,5 @@ xnoremap x j
 xnoremap X k
 " redo with U
 noremap U <C-r>
+" Force saving files that require root permission
+cnoremap w!! w !sudo tee > /dev/null %
