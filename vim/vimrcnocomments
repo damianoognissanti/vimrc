@@ -1,0 +1,59 @@
+colorscheme habamax
+syntax enable
+filetype indent on 
+filetype plugin on
+set nocompatible number lazyredraw belloff=all wildmenu cursorline shiftwidth=4 tabstop=4 expandtab softtabstop=4 modelines=1 cmdheight=1 showcmd laststatus=2 showtabline=2 backspace=eol,start,indent mouse=a whichwrap+=<,>,[,],h,l ignorecase hlsearch incsearch clipboard=unnamedplus statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c 
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | exe "normal! zz'\"" |endif 
+au BufAdd,BufNewFile * nested tab sball 
+function ToggleFold()
+    let view = winsaveview()
+    exec 'keepjumps normal! zj'
+    if foldclosed('.') > -1
+        exec 'normal! zR' 
+    else
+        exec 'keepjumps normal! zk'
+        if foldclosed('.') > -1
+            exec 'normal! zR' 
+        else
+            exec 'normal! zM' 
+        endif
+    endif
+    call winrestview(view)
+endfunction
+let g:fzf_layout = { 'down': '100%' } 
+let g:foldsearch_disable_mappings = 1
+let mapleader = "\<space>" 
+map gl $
+map gh 0
+map gj G
+map gk gg
+xnoremap s :VMSearch<space>
+nnoremap <silent> <leader>gw :Ag <C-R><C-W><cr>
+nnoremap <silent> <leader>gf :Files<cr>
+nnoremap <silent> <leader>gl :BLines <cr>
+nnoremap <silent> <leader>fi :Fi<cr>
+nnoremap <silent> <leader>fd :Fd<cr>
+nnoremap <silent> <leader>d D
+nnoremap <silent> <leader>p P
+nnoremap <silent> <leader>v V
+nnoremap <silent> <leader>o O
+nnoremap <silent> <leader>c C
+nnoremap <silent> <leader>y y$ 
+nnoremap <silent> <leader>u <C-r>
+nnoremap <silent> <leader>l v$
+nnoremap <silent> <leader>h v0
+nnoremap <silent> <leader>j <C-v>j
+nnoremap <silent> <leader>k <C-v>k
+nnoremap <silent> <leader>w vw
+nnoremap <silent> <leader>b vb
+nnoremap <silent> <cr> :call ToggleFold()<cr>zz
+nnoremap <leader>r :%s///g<left><left><left>
+nnoremap <space> :nohlsearch<cr>
+nnoremap - /
+nnoremap ö :
+nnoremap U <C-r>
+nnoremap Y y$
+cnoremap qq q!
+cnoremap ww w !sudo tee > /dev/null %
+cnoremap <expr> <space> getcmdtype() == "/" \|\| getcmdtype() == "?" ? ".\\{-}" : "<space>"
+cnoremap <expr> <cr> getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<cr>:Fs<cr>" : "<cr>"
