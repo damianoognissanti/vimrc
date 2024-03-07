@@ -2,27 +2,27 @@
 colorscheme habamax
 syntax enable
 " enable line number, disable vi compatibility, don't redraw while executing macros (better performance), disable error bell
-set nocompatible number lazyredraw belloff=all 
+set nocompatible number lazyredraw belloff=all
 " turn on the wild menu (autocomplete commands), highlight the active line
-set wildmenu cursorline "cursorcolumn 
+set wildmenu cursorline "cursorcolumn
 " 1 tab == 4 spaces
-set shiftwidth=4 tabstop=4 expandtab softtabstop=4 
+set shiftwidth=4 tabstop=4 expandtab softtabstop=4
 " height of the command bar, show commands in bottom line (and number prefixes), always show statusline, always show tab line
-set modelines=1 cmdheight=1 showcmd laststatus=2 showtabline=2 
+set modelines=1 cmdheight=1 showcmd laststatus=2 showtabline=2
 " configure backspace to act like it should, enable mouse support, left/right at beginning/end of line will go to previous/next line
-set backspace=eol,start,indent mouse=a whichwrap+=<,>,[,],h,l 
+set backspace=eol,start,indent mouse=a whichwrap+=<,>,[,],h,l
 " ignore case when searching, highlight search results, incremental search, yank/paste to unnamed register
-set ignorecase hlsearch incsearch clipboard=unnamedplus 
+set ignorecase hlsearch incsearch clipboard=unnamedplus
 " set status line information (file name, cwd, line, col)
-set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c 
+set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 " recognize filetypes and behave differently depending on filetype
 filetype indent on
 filetype plugin on
 
 " return to last edit position when opening files, always open buffers in new tabs
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif 
-au BufAdd,BufNewFile * nested tab sball 
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+au BufAdd,BufNewFile * nested tab sball
 " set timeout for buttons to 200ms in insert mode, 1000ms in other modes, map jj to <esc>.
 au InsertEnter * set timeoutlen=200
 au InsertLeave * set timeoutlen=1000
@@ -32,25 +32,25 @@ inoremap jj <esc>
 function ToggleFold()
     let view = winsaveview()
     exec 'keepjumps normal! zj'
-    if foldclosed('.') > -1 
-        exec 'normal! zR' 
+    if foldclosed('.') > -1
+        exec 'normal! zR'
     else
         exec 'keepjumps normal! zk'
-        if foldclosed('.') > -1 
-            exec 'normal! zR' 
-        else 
-            exec 'normal! zM' 
+        if foldclosed('.') > -1
+            exec 'normal! zR'
+        else
+            exec 'normal! zM'
         endif
     endif
     call winrestview(view)
 endfunction
 
 " show fzf window in other tab (needed to that no .swp is created if cancelled without opening anything)
-let g:fzf_layout = { 'down': '100%' } 
+let g:fzf_layout = { 'down': '100%' }
 " disable standard mappings for fold search
 let g:foldsearch_disable_mappings = 1
 " map leader to space
-let mapleader = "\<space>" 
+let mapleader = "\<space>"
 
 " remaps these commands so that they work for d, c, y, etc. so ygl yanks from
 " cursor till the end of the line.
@@ -74,7 +74,7 @@ nnoremap <silent> <leader>v V
 nnoremap <silent> <leader>o O
 nnoremap <silent> <leader>c C
 " should be default for Y.
-nnoremap <silent> <leader>y y$ 
+nnoremap <silent> <leader>y y$
 " should be default for U.
 nnoremap <silent> <leader>u <C-r>
 " different types of visual mode
@@ -96,7 +96,7 @@ cnoremap ww w !sudo tee > /dev/null %
 nnoremap <silent> <leader>t :terminal<cr>
 tmap <leader>t <esc>:bd!<cr>
 tmap <esc> <C-\><C-n>
-" copy until end of line with Y 
+" copy until end of line with Y
 nnoremap Y y$
 " redo with U
 noremap U <C-r>

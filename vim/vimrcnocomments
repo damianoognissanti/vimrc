@@ -1,28 +1,28 @@
 colorscheme habamax
 syntax enable
-filetype indent on 
+filetype indent on
 filetype plugin on
-set nocompatible number lazyredraw belloff=all wildmenu cursorline shiftwidth=4 tabstop=4 expandtab softtabstop=4 modelines=1 cmdheight=1 showcmd laststatus=2 showtabline=2 backspace=eol,start,indent mouse=a whichwrap+=<,>,[,],h,l ignorecase hlsearch incsearch clipboard=unnamedplus statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c 
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | exe "normal! zz'\"" |endif 
-au BufAdd,BufNewFile * nested tab sball 
+set nocompatible number lazyredraw belloff=all wildmenu cursorline shiftwidth=4 tabstop=4 expandtab softtabstop=4 modelines=1 cmdheight=1 showcmd laststatus=2 showtabline=2 backspace=eol,start,indent mouse=a whichwrap+=<,>,[,],h,l ignorecase hlsearch incsearch clipboard=unnamedplus statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | exe "normal! zz'\"" |endif
+au BufAdd,BufNewFile * nested tab sball
 function ToggleFold()
     let view = winsaveview()
     exec 'keepjumps normal! zj'
     if foldclosed('.') > -1
-        exec 'normal! zR' 
+        exec 'normal! zR'
     else
         exec 'keepjumps normal! zk'
         if foldclosed('.') > -1
-            exec 'normal! zR' 
+            exec 'normal! zR'
         else
-            exec 'normal! zM' 
+            exec 'normal! zM'
         endif
     endif
     call winrestview(view)
 endfunction
-let g:fzf_layout = { 'down': '100%' } 
+let g:fzf_layout = { 'down': '100%' }
 let g:foldsearch_disable_mappings = 1
-let mapleader = "\<space>" 
+let mapleader = "\<space>"
 map gl $
 map gh 0
 map gj G
@@ -38,7 +38,7 @@ nnoremap <silent> <leader>p P
 nnoremap <silent> <leader>v V
 nnoremap <silent> <leader>o O
 nnoremap <silent> <leader>c C
-nnoremap <silent> <leader>y y$ 
+nnoremap <silent> <leader>y y$
 nnoremap <silent> <leader>u <C-r>
 nnoremap <silent> <leader>l v$
 nnoremap <silent> <leader>h v0
