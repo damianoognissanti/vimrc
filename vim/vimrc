@@ -52,33 +52,55 @@ let g:foldsearch_disable_mappings = 1
 " map leader to space
 let mapleader = "\<space>" 
 
+" remaps these commands so that they work for d, c, y, etc. so ygl yanks from
+" cursor till the end of the line.
+map gl $
+map gh 0
+map gj G
+map gk gg
 " s in visual mode will search for word where multicursor will be created
 xnoremap s :VMSearch<space>
 " fzf grep, fzf files, fzf lines, unfold all, increase lines in fold, decrease
 " lines in fold, replace all
-nnoremap <silent> <leader>g :Ag <C-R><C-W><cr>
-nnoremap <silent> <leader>f :Files<cr>
-nnoremap <silent> <leader>l :BLines <cr>
-nnoremap <silent> <leader>i :Fi<cr>
-nnoremap <silent> <leader>d :Fd<cr>
+nnoremap <silent> <leader>gw :Ag <C-R><C-W><cr>
+nnoremap <silent> <leader>gf :Files<cr>
+nnoremap <silent> <leader>gl :BLines <cr>
+nnoremap <silent> <leader>fi :Fi<cr>
+nnoremap <silent> <leader>fd :Fd<cr>
+" make space behave as shift
+nnoremap <silent> <leader>d D
+nnoremap <silent> <leader>p P
+nnoremap <silent> <leader>v V
+nnoremap <silent> <leader>o O
+nnoremap <silent> <leader>c C
+" should be default for Y.
+nnoremap <silent> <leader>y y$ 
+" should be default for U.
+nnoremap <silent> <leader>u <C-r>
+" different types of visual mode
+nnoremap <silent> <leader>l v$
+nnoremap <silent> <leader>h v0
+nnoremap <silent> <leader>j <C-v>j
+nnoremap <silent> <leader>k <C-v>k
+nnoremap <silent> <leader>w vw
+nnoremap <silent> <leader>b vb
 nnoremap <silent> <cr> :call ToggleFold()<cr>zz
 noremap <leader>r :%s///g<left><left><left>
-" search is "fuzzy" by adding .\{-} instead of space when searching, space clear search highlight, ö/Ö mapped to search.
-cnoremap <expr> <space> getcmdtype() == "/" \|\| getcmdtype() == "?" ? ".\\{-}" : "<space>"
-cnoremap <expr> <cr> getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<cr>:Fs<cr>" : "<cr>"
-nnoremap <space> :nohlsearch<cr>
-nnoremap ö /
-nnoremap Ö ?
+" - mapped to search, ö to colon.
+nnoremap - /
+nnoremap ö :
+" force quit and sudo save.
+cnoremap qq q!
+cnoremap ww w !sudo tee > /dev/null %
 " toggles terminal, esc enters normal mode in terminal
 nnoremap <silent> <leader>t :terminal<cr>
 tmap <leader>t <esc>:bd!<cr>
 tmap <esc> <C-\><C-n>
-" x/X marks line (helix-like)
-nnoremap x V
-nnoremap X V
-xnoremap x j
-xnoremap X k
+" copy until end of line with Y 
+nnoremap Y y$
 " redo with U
 noremap U <C-r>
-" Force saving files that require root permission
-cnoremap w!! w !sudo tee > /dev/null %
+" search is "fuzzy" by adding .\{-} instead of space when searching, space clear search highlight
+cnoremap <expr> <space> getcmdtype() == "/" \|\| getcmdtype() == "?" ? ".\\{-}" : "<space>"
+cnoremap <expr> <cr> getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<cr>:Fs<cr>" : "<cr>"
+nnoremap <leader> :nohlsearch<cr>
