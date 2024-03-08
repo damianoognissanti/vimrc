@@ -51,6 +51,10 @@ let g:fzf_layout = { 'down': '100%' }
 let g:foldsearch_disable_mappings = 1
 " map leader to space
 let mapleader = "\<space>"
+" this selects the next closest text object.
+map <leader>m <Plug>(wildfire-fuel)
+" this selects the previous closest text object.
+vmap <leader>n <Plug>(wildfire-water)
 
 " remaps these commands so that they work for d, c, y, etc. so ygl yanks from
 " cursor till the end of the line.
